@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		
+		<style type="text/css">
+			body{
+				padding-top: 50px;
+			}
+			div[class^=col] {
+				padding: 10px
+			}
+			.item{
+				height: 120px;
+				border-radius : 4px;
+				background : #eee;
+				text-align: center;
+			}
+		</style>
+	</head>
+    <script src="js/cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		"use strict";
+		
+		onload = function(){
+			var btn=getelementclassname("btn");
+			for (var i = 0; i < btn.length; i++) {
+             btn[i].addEventListener("mousedown",function(){
+					var pst = this.parentElement.children;
+					console.log(this);
+				    var _name=pst[0].innerHTML;
+				    var _price=pst[1].children[0].innerHTML;
+				    var obj={
+				    	name:_name,
+				    	price:_price
+				    }
+				    var str=JSON.stringify(obj);
+					console.log(str);
+					
+                     document.cookie=setcookie(_name,str,10);
+				   
+				   alert("已添加到购物车");
+					
+				})
+				
+			}
+			
+			
+		
+		
+			
+			
+			
+			
+			
+		}
+	</script>
+	
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-9 col-xs-12">
+					<div class="item">
+						<p class="text-center">商品1</p>
+						<p>价格： $<code>56.3</code> 编号：<span>2310</span></p>
+						<a class="btn btn-warning btn-sm">购买</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-9 col-xs-12">
+					<div class="item">
+						<p class="text-center">商品2</p>
+						<p>价格： $<code>999</code> 编号：<span>5610</span></p>
+						<a class="btn btn-warning btn-sm">购买</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-9 col-xs-12">
+					<div class="item">
+						<p class="text-center">商品3</p>
+						<p>价格： $<code>156</code> 编号：<span>1306</span></p>
+						<a class="btn btn-warning btn-sm">购买</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-9 col-xs-12">
+					<div class="item">
+						<p class="text-center">商品4</p>
+						<p>价格： $<code>99.5</code> 编号：<span>9985</span></p>
+						<a class="btn btn-warning btn-sm">购买</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	
+
+</html>

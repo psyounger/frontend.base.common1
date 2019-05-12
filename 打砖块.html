@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	       <style type="text/css">
+	       	#box{
+				margin: 100px auto;
+				width:600px;
+				height: 600px;
+				border: 1px solid red;
+				position:relative;
+			}
+			#ball{
+				width:20px;
+				height: 20px;
+				background:blue;
+				position:absolute;
+				border-radius: 50%;
+				bottom:15px;
+				left:290px;
+			}
+			   #bat{
+				   width:120px;
+				   height:15px;
+				   background: red;
+				   position:absolute;
+				   bottom:0;
+				   left:240px;
+
+			   }
+			   #brick div {
+				   width:98px;
+				   height:15px;
+				   border:1px solid blue;
+				   float: left;
+
+			   }
+	       </style>
+	</head>
+	<script type="text/javascript">
+		onload=function(){
+			let oBrick=document.getElementById("brick");
+			let aBricks=oBrick.getElementsByTagName("div");
+
+			var ball=document.getElementById("ball");
+			var box=document.getElementById("box");
+			var bat=document.getElementById("bat");
+
+
+			createBrick(65);
+			//console.log(ball);
+			var x=6+Math.random()*8;
+			var y=-(7+Math.random()*8);
+		setInterval(yidong,30);
+
+		function yidong(){
+			ball.style.left=ball.offsetLeft +x+"px";
+			ball.style.top=ball.offsetTop +y+"px";
+			//console.log(ball.offsetLeft);
+			if(ball.offsetLeft>=580||ball.offsetLeft<=0){
+			 x = -x;	
+
+		
+			//console.log(ball.offsetLeft);
+			}
+			if(ball.offsetTop>=580||ball.offsetTop<=0){
+				y = -y;	
+
+			
+				// console.log(ball.offsetLeft);
+				}
+			//小球和拍子发生碰撞
+			if(Collage(ball,bat)){
+				y=-y
+			}
+			//小球和砖块发生碰撞
+
+			for (var i=0;i<aBricks.length;i++){
+				if(Collage(aBricks[i],ball)){
+					//改变运动方向
+					y=-y;
+					//清除碰到的砖块
+					oBrick.removeChild(aBricks[i]);
+				}
+			}
+			if(ball.offsetTop>590){
+				alert("游戏结束")
+			}
+
+			}
+			//拖拽 记录相对位置
+			//console.log(bat.offsetLeft);
+			bat.onmousedown=function (ev) {
+			 var offsetX=0;
+			 let e=ev||event;
+			console.log(e.offsetX);
+			 offsetX=e.offsetX;
+			 document.onmousemove=function(ev){
+				 let e=ev||event;
+				var l=Math.max(0,(Math.min(e.clientX-offsetX-box.offsetLeft,480)));
+				 bat.style.left=l+"px";
+			 }
+			 document.onmouseup=function(){
+				 document.onmousemove=null;
+			 }
+
+		 }
+
+        //封装一个创建砖块的函数
+			function createBrick(n) {
+			let brick=document.getElementById("brick");
+			//通过循环创建砖块
+				for(let i=0;i<n;i++){
+				let	Brickn=document.createElement("div");
+				    Brickn.style.backgroundColor=randomColor();
+				brick.appendChild(Brickn);
+
+				}
+				//将砖块的位置设置为觉得定位
+				var aBricks=oBrick.getElementsByTagName("div");
+				for(var i=0;i<aBricks.length;i++){
+					aBricks[i].style.left=aBricks[i].offsetLeft+"px";
+					aBricks[i].style.top=aBricks[i].offsetTop+"px";
+				}
+				for(var i=0;i<aBricks.length;i++){
+					aBricks[i].style.position="absolute";
+				}
+			}
+				//封装一个随机颜色的函数
+			function randomColor(){
+				var str="rgba("+parseInt(Math.random()*256)+"," +parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+",1)"
+				return str
+			}
+			function Collage(div1,div2){
+				let l1=div1.offsetLeft;
+				let r1=div1.offsetLeft+div1.offsetWidth;
+				let t1=div1.offsetTop;
+				let b1=div1.offsetTop+div1.offsetHeight;
+
+				let l2=div2.offsetLeft;
+				let r2=div2.offsetLeft+div2.offsetWidth;
+				let t2=div2.offsetTop;
+				let b2=div2.offsetTop+div2.offsetHeight;
+				if (l1>r2||l2>r1||b1<t2||b2<t1){
+					return false;
+				} else{
+					return true;
+				}
+			}
+		}
+	</script>
+	<body>
+		<div id="box">
+			<div id="bat"></div>
+		    <div id="ball"></div>
+			<div id="brick">
+				<!--<div></div>-->
+				<!--<div></div>-->
+				<!--<div></div>-->
+				<!--<div></div>-->
+				<!--<div></div>-->
+				<!--<div></div>-->
+			</div>
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.box1{
+				background:red;
+				width:300px;
+				height:200px;
+			}
+			.box2{
+				background:blue;
+				width:100px;
+				height:100px;
+			}
+			.box3{
+				background:black;
+				width:50px;
+				height:50px;
+			}
+		</style>
+	</head>
+	
+	<script type="text/javascript">
+		function b(){
+		var promise=new Promise((success,fail)=>{
+				success(8);
+			})
+			return promise;
+			}
+		async function a(){
+			var data=await b();
+			//console.log(data)
+			return data;
+		}
+		a()
+// 		async function data(){
+// 			let data=await a();
+// 			console.log(data);
+// 		}
+// 		data();
+			</script>
+	<body>
+		<div class="box1">
+			<div class="box2">
+				<div class="box3"></div>
+			</div>
+		</div>
+	</body>
+</html>

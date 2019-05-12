@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			//快速排序法
+// 			function quickSort(m){
+// 				
+// 				if(m.length<=1){
+// 					return m;
+// 				}
+// 				var indexMiddle=parseInt(m.length/2);
+// 				var left=[];
+// 				var right=[];
+// 				var middle=m[indexMiddle];
+// 				for(var i=0;i<m.length;i++){
+// 					if(i==indexMiddle){
+// 						continue;
+// 					}
+// 					if(m[i]<=middle){
+// 						left.push(m[i]);
+// 					}else{
+// 						right.push(m[i]);
+// 					}
+// 				
+// 				}
+// 				
+// 			return quickSort(left).concat(middle).concat(quickSort(right))
+// 			}
+// 			
+// 			var n=[0,0,0,0,-79]
+// 			var result=quickSort(n);
+// 			console.log(result)
+// 			//定义一个数组 消除里面的重复元素
+// 			function removeSame(arr){
+// 				var m=[];
+// 				for(var i=0;i<arr.length;i++){
+// 					if(m.indexOf(arr[i])<0){
+// 						m.push(arr[i])
+// 					}
+// 				}
+// 				return m;
+// 			}
+// 			alert(removeSame([3,1,88,0,76,21,90,56]))
+// //                  二分查找法
+       function twoDivideSearch(low,high,a,Arr){
+		   
+		    if (low > high){
+                return -1;
+            }
+
+		
+		   var middleIndex=parseInt((low+high)/2);
+		   if(a==Arr[middleIndex]){
+			   return middleIndex;
+		   }
+		   else if(a>Arr[middleIndex]){
+			   low=middleIndex+1;
+			   return twoDivideSearch(low,high,a,Arr);
+		   }else{
+			   high=middleIndex-1;
+			   return twoDivideSearch(low,high,a,Arr);
+		   }
+		   
+		   
+	   }
+	  var gg=twoDivideSearch(0,7,90,[3,1,88,0,76,21,90,56]);
+	  alert(gg)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

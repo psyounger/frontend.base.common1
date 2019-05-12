@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box1{
+				width:100px;
+				height:100px;
+				background:red;
+				position:absolute;
+			}
+			#box2{
+				width:100px;
+				height:100px;
+				background:blue;
+				position:absolute;
+				left: 200px;
+			}
+		</style>
+	</head>
+	
+	<script type="text/javascript">
+		window.onload=function(){
+			function Collage(div1,div2){
+				let l1=div1.offsetLeft;
+				let r1=div1.offsetLeft+div1.offsetWidth;
+				let t1=div1.offsetTop;
+				let b1=div1.offsetTop+div1.offsetHeight;
+
+				let l2=div2.offsetLeft;
+				let r2=div2.offsetLeft+div2.offsetWidth;
+				let t2=div2.offsetTop;
+				let b2=div2.offsetTop+div2.offsetHeight;
+				if (l1>r2||l2>r1||b1<t2||b2<t1){
+					return false;
+				} else{
+					return true;
+				}
+			}
+			let Div1=document.getElementById("box1");
+			let Div2=document.getElementById("box2");
+
+			function drag(obj){
+				obj.onmousedown=function (ev) {
+
+					let e=ev||event;
+					e.preventDefault ? e.preventDefault() : e.returnValue=false;
+					let x=e.offsetX;
+					let y=e.offsetY;
+					document.onmousemove=function(ev){
+						let e=ev||event;
+						obj.style.left=e.clientX-x+"px";
+						obj.style.top=e.clientY-y+"px";
+						if (Collage(Div1,Div2)){
+							Div1.style.backgroundColor="black";
+						}else{
+							Div1.style.backgroundColor="yellow"
+						}
+					}
+					document.onmouseup=function(){
+						document.onmousemove=null;
+					}
+				}
+
+			}
+		drag(Div1);
+		drag(Div2);
+
+		}
+
+
+			</script>
+	<body>
+	<div id="box1"></div>
+	<div id="box2"></div>
+	</body>
+</html>

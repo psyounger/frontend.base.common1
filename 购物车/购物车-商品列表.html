@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		
+		<style type="text/css">
+			body{
+				padding-top: 50px;
+			}
+			div[class^=col] {
+				padding: 10px
+			}
+			.item{
+				height: 120px;
+				border-radius : 4px;
+				background : #eee;
+				text-align: center;
+			}
+			.input-sm{
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<script src="js/cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		window.onload = function(){
+                
+				var arr=getcookie("商品");
+			
+				for (var i = 0; i < arr.length; i++) {
+					var str1=JSON.parse(arr[i]);
+					var table= document.getElementById("table_data");
+					var li=table.children[0].children[1];
+					var tr=document.createElement("tr");
+					tr.innerHTML=li.innerHTML;
+					tr.children[0].innerHTML=str1.name;
+					tr.children[1].innerHTML=str1.price;
+					table.children[0].appendChild(tr);
+			    }
+				
+				var btn=getelementclassname("btn-sm");
+				
+				for (var i = 0; i < btn.length; i++) {
+					
+					btn[i].addEventListener("mousedown",function(){
+						this.parentNode.parentNode.remove();
+						var name=this.parentNode.parentNode.children[0].innerHTML;
+						var str= document.cookie.split("; ")
+						for (var i = 0; i < str.length; i++) {
+							 var strs = str[i].split("=");
+							if(strs[0]==name){
+								console.log("111");
+								setcookie(name,"",-10);
+							}
+						}
+						
+					})
+				}
+				
+	
+				
+		
+		}
+	</script>
+	<body>
+		<div class="container">
+			<div class="col-lg-8">
+				<table id="table_data" class="table table-hover">
+					<tr>
+						<td class="active">商品名称</td>
+						<td class="success">商品价格</td>
+						<td class="warning">商品数量</td>
+						<td class="danger">operation</td>
+					</tr>
+					<tr style="display: none;">
+						<td class="text-center"><h5>商品2</h5></td>
+						<td class="text-center"><h5>$999</h5></td>
+						<td class="text-center" style="width:150px">
+						<div class="input-group">
+							<span class="input-group-addon input-sm">-</span>
+							<input type="text" class="form-control" placeholder="0">
+							<span class="input-group-addon input-sm">+</span>
+						</div>
+						</td>
+						<td class="text-center">
+						<button class="btn btn-danger btn-sm" href="#" role="delete">删除</button>
+						</td>
+					</tr>
+				</table>
+				<hr>
+				<div class="text-center">
+					<a class="btn btn-primary btn-lg">提交订单</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
